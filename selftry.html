@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>replit-of-DOM</title>
+</head>
+<body>
+    <input type="text"></input>
+    <button onclick="AddTODO()">Add TODO</button>
+<div id="todos">
+    <div id="todo1">1. go to gym</div>
+    <div id="todo2">2. assignments</div>
+</div>
+
+</body>
+<script>
+    let ctr =3;
+    function AddTODO(){
+        IpeEl= document.querySelector("input");
+       const value=IpeEl.value;
+       const newDivEl= document.createElement("div");
+       newDivEl.setAttribute("id", ctr)
+       newDivEl.innerHTML= "<div>" + ctr +"."+ value + "</div> <button onclick= 'deleteTodo("+ ctr +")'>delete</button>";
+       ctr =ctr +1;
+       document.querySelector("body").appendChild(newDivEl);
+    }
+    function deleteTodo (ctr){
+       const Elementpl = document.getElementById(ctr)
+        Elementpl.parentNode.removeChild(Elementpl);
+
+    }
+ 
+</script>
+</html>

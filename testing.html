@@ -1,0 +1,67 @@
+<body>
+    <input type="text">
+    <button onclick="addTodo()">Add Todo!</button>
+    <button onclick="deleteFirstTodo()">Delete First Todo</button>
+    <button onclick="deleteLastTodo()">Delete Last Todo</button>
+    <div id="todos"></div>
+
+<script>
+let todos = [];
+
+function addTodo(){
+    const value = document.querySelector("input").value.trim();
+    if (value !== "") {
+        todos.push({ title: value });
+        document.querySelector("input").value = ""; // Clear input
+        render();
+    }
+}
+
+function deleteLastTodo(){
+    if (todos.length > 0) {
+        todos.splice(todos.length - 1, 1);
+        render(); 
+    }
+}
+
+function deleteFirstTodo(){
+    if (todos.length > 0) {
+        todos.splice(0, 1);
+        render();
+    }
+}
+
+// Delete a specific todo by index
+function deleteTodo(index) {
+    todos.splice(index, 1);
+    render();
+}
+
+// Create a single todo component
+function createTodoComponent(todo, index){
+    const div = document.createElement("div");
+    const h1 = document.createElement("h1");
+    const button = document.createElement("button");
+
+    h1.innerHTML = todo.title;
+    button.innerHTML = "Delete";
+
+    // Add delete function on button
+    button.onclick = () => deleteTodo(index);
+
+    div.append(h1);
+    div.append(button);
+    return div;
+}
+
+// Render all todos
+function render(){
+    const container = document.querySelector("#todos");
+    container.innerHTML = "";
+    for (let i = 0; i < todos.length; i++){
+        const element = createTodoComponent(todos[i], i);
+        container.appendChild(element);
+    }
+}
+</script>
+</body>
